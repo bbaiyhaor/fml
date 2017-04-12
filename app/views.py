@@ -128,6 +128,7 @@ def face_recog(url):
     try:
         conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
         rurl = 'http://mydns.koreasouth.cloudapp.azure.com' + url
+        print rurl
         body = {'url': rurl}
         conn.request("POST", "/face1.0/detect?%s" % params, json.dumps(body), headers)
         response = conn.getresponse()
