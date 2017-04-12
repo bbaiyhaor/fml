@@ -25,7 +25,7 @@ SECRET_KEY = '0^wn=b2o28=nljfih^@tkn$m#yr(9*@qiu#_pedq=*qh2v5a$!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mydns.koreasouth.cloudapp.azure.com']
 
 
 # Application definition
