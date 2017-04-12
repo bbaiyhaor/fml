@@ -135,7 +135,7 @@ def faceapi(request):
         data = response.read()
         print(data)
         conn.close()
-        return JsonResponse(data)
+        return JsonResponse({'data':data})
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
@@ -157,7 +157,7 @@ def face_recog(url):
         rurl = 'http://mydns.koreasouth.cloudapp.azure.com' + url
         print rurl
         body = {'url': rurl}
-        conn.request("POST", "/face1.0/detect?%s" % params, json.dumps(body), headers)
+        conn.request("POST", "/face/v1.0/detect?%s" % params, json.dumps(body), headers)
         response = conn.getresponse()
         data = response.read()
         print(data)
