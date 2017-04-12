@@ -127,7 +127,8 @@ def face_recog(url):
     })
     try:
         conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
-        body = {'url': 'http://www.hz11x.com/Article/UploadFiles/200807/2008073012101702.jpg'}
+        rurl = 'http://mydns.koreasouth.cloudapp.azure.com' + url
+        body = {'url': rurl}
         conn.request("POST", "/face1.0/detect?%s" % params, json.dumps(body), headers)
         response = conn.getresponse()
         data = response.read()
@@ -143,10 +144,12 @@ def uploadImg(request):
     return render(request, 'app/uploadimg.html')
 
 def save_profile(request):
+    print request.method
     if request.method == "POST":
         # 接收 post 方法传回后端的数据
         MyProfileForm = ProfileForm(request.POST, request.FILES)
         # 检验表单是否通过校验
+        print MyProfileForm.is_valid()
         if MyProfileForm.is_valid():
             # 构造一个 Profile 实例
             profile = Profile()
