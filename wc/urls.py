@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^login', uploadImg, name='login'),
     # 上传并保存图片的 url
     url(r'^save_profile/', save_profile, name='save_profile'),
+    url(r'^faceapi/', faceapi, name='faceapi'),
 ]

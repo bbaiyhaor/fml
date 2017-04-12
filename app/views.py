@@ -112,6 +112,33 @@ def search(request):
         print(json.loads(error.read()))
     return JsonResponse(dict)
 
+def faceapi(request):
+    url = request.GET.get('url','http://mydns.koreasouth.cloudapp.azure.com/static/uploads/face/2008073012101702.jpg')
+    headers = {
+        # Request headers
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': '006437565f784716a0f722789b2e4215',
+    }
+
+    params = urllib.urlencode({
+        # Request parameters
+        'returnFaceId': 'true',
+        'returnFaceLandmarks': 'false',
+        'returnFaceAttributes': 'age,gender',
+    })
+    try:
+        conn = httplib.HTTPSConnection('westus.api.cognitive.microsoft.com')
+        body = {'url': url}
+        print body
+        conn.request("POST", "/face/v1.0/detect?%s" % params, json.dumps(body), headers)
+        response = conn.getresponse()
+        data = response.read()
+        print(data)
+        conn.close()
+        return JsonResponse(data)
+    except Exception as e:
+        print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
 def face_recog(url):
     headers = {
         # Request headers
