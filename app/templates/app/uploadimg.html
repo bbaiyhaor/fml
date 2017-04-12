@@ -1,0 +1,17 @@
+﻿<html>
+
+<body>
+
+    <form enctype="multipart/form-data" action="{% url "save_profile" %}" method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" placeholder="名字" name="name" />
+    <br><br>
+    <input type="file" placeholder="图片" name="picture" />
+    <br><br>
+    <button type="submit" value="Login">上传</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<html>
+{% load staticfiles %}
+  <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  </head>
+  <body>
+   <div>symboling <input type = "text" name="wocao" required id = "symboling"></input></div>
+   <div>normalized-losses <input type = "text" name="wocao" required id = "normalized-losses"></input></div>
+   <div>make <input type = "text" name="wocao" required id = "make"></input></div>
+   <div>fuel-type <input type = "text" name="wocao" required id = "fuel-type"></input></div>
+      <div>aspiration <input type = "text" name="wocao" required id = "aspiration"></input></div>
+   <div>num-of-doors <input type = "text" name="wocao" required id = "num-of-doors"></input></div>
+   <div>body-style <input type = "text" name="wocao" required id = "body-style"></input></div>
+   <div>drive-wheels <input type = "text" name="wocao" required id = "drive-wheels"></input></div>
+   <div>engine-location <input type = "text" name="wocao" required id = "engine-location"></input></div>
+   <div>wheel-base <input type = "text" name="wocao" required id = "wheel-base"></input></div>
+   <div>length <input type = "text" name="wocao" required id = "length"></input></div>
+   <div>width <input type = "text" name="wocao" required id = "width"></input></div>
+   <div>height <input type = "text" name="wocao" required id = "height"></input></div>
+   <div>curb-weight <input type = "text" name="wocao" required id = "curb-weight"></input></div>
+   <div>engine-type <input type = "text" name="wocao" required id = "engine-type"></input></div>
+   <div>num-of-cylinders <input type = "text" name="wocao" required id = "num-of-cylinders"></input></div>
+   <div>engine-size <input type = "text" name="wocao" required id = "engine-size"></input></div>
+   <div>fuel-system <input type = "text" name="wocao" required id = "fuel-system"></input></div>
+   <div>bore <input type = "text" name="wocao" required id = "bore"></input></div>
+   <div>stroke <input type = "text" name="wocao" required id = "stroke"></input></div>
+    <div>compression-ratio <input type = "text" name="wocao" required id = "compression-ratio"></input></div>
+    <div>horsepower <input type = "text" name="wocao" required id = "horsepower"></input></div>
+    <div>peak-rpm <input type = "text" name="wocao" required id = "peak-rpm"></input></div>
+    <div>city-mpg <input type = "text" name="wocao" required id = "city-mpg"></input></div>
+    <div>highway-mpg <input type = "text" name="wocao" required id = "highway-mpg"></input></div>
+    <div>price <input type = "text" name="wocao" required id = "price" value="0"></input></div>
+     <div>
+    预测值：<p id = "result"></p>
+    </div>
+   <div >
+    <button type = "button" id="search" onclick="search()">预测</button>
+    </div>
+   
+  </body>
+</html>
+<script type="text/javascript">
+    function search() {
+            var data = {};
+            var flag = true;
+            $("input[name='wocao']").each(function(){
+                if ($(this).val()==""){
+                    flag = false;
+                    
+                }
+                data[$(this).attr('id')]=$(this).val();
+              });
+            if (flag == false){
+                alert('全部都不能为空');
+                return;
+            }
+            $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: data,
+                    dataType: 'json',
+                    success: function(data) {
+                        alert(data['price']);
+                       $("#result").html(data['price']);
+                        
+                    },
+                    error: function(xhr, type) {
+                        alert('查询失败');
+                    }
+            });
+      }
+</script>
